@@ -1,3 +1,6 @@
+/*globals requireClass */
+const NativePrinter = requireClass('com.pax.dal.IPrinter');
+
 class Printer {
     constructor(_printerInstance){
         this.nativeObject = _printerInstance;
@@ -11,80 +14,108 @@ class Printer {
         this.nativeObject.init();
     }
 
-    fontSet(EFontTypeAscii, EFontTypeExtCode) {
-
+    set fontSet(asciiFontType, cFontType) {
+        this.nativeObject.fontSet(asciiFontType,cFontType);
     }
 
-    spaceSet(byte1, byte2) {
-        
+    set spaceSet(wordSpace, lineSpace) {
+        this.nativeObject.spaceSet(wordSpace,lineSpace);
     }
 
-    step(var1) {
-
+    set step(b) {
+        this.nativeObject.step(b);
     }
 
-    printStr(var1, var2) {
-        
+    set printStr(srt, charSet) {
+        this.nativeObject.printStr(str, charset);
     }
 
-    printBitmap(bitmap) {
-        
+    set printBitmap(bitmap) {
+        this.nativeObject.printBitmap(bitmap);
     }
 
-    printBitmapWithMonoThreshold(Bitmap var1, int var2) {
-        
+    set printBitmapWithMonoThreshold(bitmap, threshold) {
+        this.nativeObject.printBitmapWithMonoThreshold(bitmap, threshold);
     }
 
     start() {
-        
+        return this.nativeObject.start();
     }
 
-    getStatus() {
-        
+    //Returns status int
+    get status() {
+        return this.nativeObject.getStatus();
     }
 
-    leftIndent(int var1) {
-        
+    set leftIndent(indent) {
+        this.nativeObject.leftIndent(indent);
     }
 
-    getDotLine() {
-        
+    //Handle exception case
+    get dotLine() {
+       return this.nativeObject.getDotLine();
     }
 
-    setGray(int var1) {
-        
+    set gray(level) {
+        this.nativeObject.setGray(level);
     }
 
-    doubleWidth(boolean var1, boolean var2) {
-        
+    //Boolean,Boolean
+    set doubleWidth(isAscDouble, isLocalDouble) {
+        this.nativeObject.doubleWidth(isAscDouble, isLocalDouble);
     }
 
-    doubleHeight(boolean var1, boolean var2) {
-        
+     //Boolean,Boolean
+    set doubleHeight(isAscDouble, isLocalDouble) {
+        this.nativeObject.doubleHeight(isAscDouble, isLocalDouble);
+    }
+    
+    //Boolean
+    set invert(isInvert) {
+        this.nativeObject.invert(isInvert);
     }
 
-    invert(boolean var1) {
-        
+    //int
+    set cutPaper(mode) {
+        this.nativeObject.cutPaper(mode);
     }
 
-    cutPaper(int var1) {
-        
+    //int
+    get cutMode() {
+        return this.nativeObject.getCutMode();
     }
 
-    getCutMode() {
-        
+    print(bitmap) {
+        return new Promise( (resolve,reject) => {
+            let callback = IPrinter.IPinterListener.implement({
+                onSucc: function(){
+                    resolve();
+                },
+                onError: function(status){
+                    reject(status);
+                }
+            });
+            this.nativeObject.print(bitmap, callback);
+        })
     }
 
-    print(Bitmap var1, IPrinter.IPinterListener var2) {
+    print(bitmap, threshold) {
+        return new Promise( (resolve,reject) => {
+            let callback = IPrinter.IPinterListener.implement({
+                onSucc: function(){
+                    resolve();
+                },
+                onError: function(status){
+                    reject(status);
+                }
+            });
+            this.nativeObject.print(bitmap,threshold, callback);
+        })
 
     }
 
-    print(Bitmap var1, int var2, IPrinter.IPinterListener var3) {
-
-    }
-
-    setFontPath(String var1) {
-        
+    set fontPath(path) {
+        this.nativeObject.setFontPath(path);
     }
 
 }
