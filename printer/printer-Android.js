@@ -1,35 +1,89 @@
 /*globals requireClass */
+/**
+ * Smartface Printer class is wrapper for NeptuneLiteUserApi's Printer component.
+ * @module Printer
+ * @type {object}
+ * @author Muhammed Yalcin Kuru <yalcin.kuru@smartface.io>
+ * @copyright Smartface 2020
+ */
 const NativePrinter = requireClass('com.pax.dal.IPrinter');
 
+/**
+ * 
+ * This class is a singleton component. It provides properties for initializing ,printing and modifiying the structure of output.
+ *
+ * @public
+ * @class
+ * @example
+ * 
+ */
 class Printer {
     constructor(_printerInstance){
         this.nativeObject = _printerInstance;
     }
 
+	/**
+	 * Gets singleton Printer object.
+	 * @method
+	 * @param {object}
+	 * @public
+	 */
     static getInstance(printer) {
         return this.nativeObject ? this.nativeObject : new Printer(printer);
     }
 
+    /**
+	 * Initilize with given assignes.
+	 * @method
+	 * @public
+	 */
     init() {
         this.nativeObject.init();
     }
 
-    set fontSet(asciiFontType, cFontType) {
-        this.nativeObject.fontSet(asciiFontType,cFontType);
+    /**
+	 * Sets font type.
+	 * @property {object} params
+     * @property {object} params.asciiFontType
+     * @property {object} params.cFontType
+	 * @public
+	 */
+    set fontSet(params = {}) {
+        this.nativeObject.fontSet(params.asciiFontType,params.cFontType);
     }
 
-    set spaceSet(wordSpace, lineSpace) {
-        this.nativeObject.spaceSet(wordSpace,lineSpace);
+    /**
+	 * Sets space for word & line.
+	 * @property {object} params
+     * @property {object} params.wordSpace
+     * @property {object} params.lineSpace
+	 * @public
+	 */
+    set spaceSet(params) {
+        this.nativeObject.spaceSet(params.wordSpace,params.lineSpace);
     }
 
+    /**
+	 * Sets steps.
+	 * @property {number} b
+	 * @public
+	 */
     set step(b) {
         this.nativeObject.step(b);
     }
 
-    set printStr(srt, charSet) {
-        this.nativeObject.printStr(str, charset);
+    /**
+	 * Sets print string&charset
+	 * @property {object} params
+     * @property {object} params.str
+     * @property {object} params.charset
+	 * @public
+	 */
+    set printStr(params) {
+        this.nativeObject.printStr(params.str, params.charset);
     }
 
+    
     set printBitmap(bitmap) {
         this.nativeObject.printBitmap(bitmap);
     }
@@ -38,6 +92,11 @@ class Printer {
         this.nativeObject.printBitmapWithMonoThreshold(bitmap, threshold);
     }
 
+    /**
+	 * Starts printing.
+	 * @method
+	 * @public
+	 */
     start() {
         return this.nativeObject.start();
     }
