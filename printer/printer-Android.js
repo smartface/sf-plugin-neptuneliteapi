@@ -14,7 +14,6 @@ const NativePrinter = requireClass('com.pax.dal.IPrinter');
  *
  * @public
  * @class
- * @example
  * 
  */
 class Printer {
@@ -83,13 +82,26 @@ class Printer {
         this.nativeObject.printStr(params.str, params.charset);
     }
 
-    
-    set printBitmap(bitmap) {
-        this.nativeObject.printBitmap(bitmap);
+    /**
+	 * Sets image
+	 * @property {UI.Image} image
+     * @see {@link http://ref.smartface.io/#!/api/UI.Image  Image component}
+	 * @public
+	 */
+    set printBitmap(image) {
+        this.nativeObject.printBitmap(image.nativeObject.getBitmap());
     }
 
-    set printBitmapWithMonoThreshold(bitmap, threshold) {
-        this.nativeObject.printBitmapWithMonoThreshold(bitmap, threshold);
+    /**
+	 * Sets image by threshold
+     * @property {object} params
+	 * @property {UI.Image} params.image
+     * @property {number} params.threshold
+     * @see {@link http://ref.smartface.io/#!/api/UI.Image  Image component}
+	 * @public
+	 */
+    set printBitmapWithMonoThreshold(params = {}) {
+        this.nativeObject.printBitmapWithMonoThreshold(params.image, params.threshold);
     }
 
     /**
@@ -101,50 +113,105 @@ class Printer {
         return this.nativeObject.start();
     }
 
-    //Returns status int
+
+     /**
+	 * Gets status
+     * @returns {number}
+     * @see {@link http://ref.smartface.io/#!/api/UI.Image  Image component}
+	 * @public
+	 */
     get status() {
         return this.nativeObject.getStatus();
     }
 
+
+     /**
+	 * Sets left indent 
+     * @property {number} indent
+	 * @public
+	 */
     set leftIndent(indent) {
         this.nativeObject.leftIndent(indent);
     }
 
-    //Handle exception case
+    //ToDo: Handle exception case
+    /**
+	 * Gets dot line
+     * @returns {number}
+	 * @public
+	 */
     get dotLine() {
        return this.nativeObject.getDotLine();
     }
 
+
+    /**
+	 * Sets gray level
+     * @property {number} level
+	 * @public
+	 */
     set gray(level) {
         this.nativeObject.setGray(level);
     }
 
-    //Boolean,Boolean
-    set doubleWidth(isAscDouble, isLocalDouble) {
-        this.nativeObject.doubleWidth(isAscDouble, isLocalDouble);
+    /**
+	 * Sets double width
+	 * @property {object} params
+     * @property {Boolean} params.isAscDouble
+     * @property {Boolean} params.isLocalDouble
+	 * @public
+	 */
+    set doubleWidth(params = {}) {
+        this.nativeObject.doubleWidth(params.isAscDouble, params.isLocalDouble);
     }
 
-     //Boolean,Boolean
-    set doubleHeight(isAscDouble, isLocalDouble) {
-        this.nativeObject.doubleHeight(isAscDouble, isLocalDouble);
+    /**
+	 * Sets double height
+	 * @property {object} params
+     * @property {Boolean} params.isAscDouble
+     * @property {Boolean} params.isLocalDouble
+	 * @public
+	 */
+    set doubleHeight(params = {}) {
+        this.nativeObject.doubleHeight(params.isAscDouble, params.isLocalDouble);
     }
     
-    //Boolean
+    /**
+	 * Enble/Disable invert
+     * @property {Boolean} isInvert
+	 * @public
+	 */
     set invert(isInvert) {
         this.nativeObject.invert(isInvert);
     }
 
-    //int
+    /**
+	 * Sets cut paper mode
+     * @property {number} mode
+	 * @public
+	 */
     set cutPaper(mode) {
         this.nativeObject.cutPaper(mode);
     }
 
-    //int
+    /**
+	 * Gets cut mode
+     * @returns {number}
+	 * @public
+	 */
     get cutMode() {
         return this.nativeObject.getCutMode();
     }
 
-    print(bitmap) {
+    /**
+	 * Asynchronous Print Image
+	 * @method
+	 * @param {UI.Image}
+     * @returns {Promise}
+     * @see {@link http://ref.smartface.io/#!/api/UI.Image  Image component}
+	 * @public
+	 */
+    print(image) {
         return new Promise( (resolve,reject) => {
             let callback = IPrinter.IPinterListener.implement({
                 onSucc: function(){
@@ -154,11 +221,20 @@ class Printer {
                     reject(status);
                 }
             });
-            this.nativeObject.print(bitmap, callback);
+            this.nativeObject.print(image, callback);
         })
     }
 
-    print(bitmap, threshold) {
+    /**
+	 * Asynchronous Print Image by threshold
+	 * @method
+     * @param {object} params
+	 * @param {UI.Image} params.image
+     * @param {number} params.threshold
+     * @returns {Promise}
+	 * @public
+	 */
+    print(params = {}) {
         return new Promise( (resolve,reject) => {
             let callback = IPrinter.IPinterListener.implement({
                 onSucc: function(){
@@ -168,15 +244,18 @@ class Printer {
                     reject(status);
                 }
             });
-            this.nativeObject.print(bitmap,threshold, callback);
+            this.nativeObject.print(params.image,params.threshold, callback);
         })
 
     }
 
+     /**
+	 * Sets font path
+     * @property {string} path
+	 * @public
+	 */
     set fontPath(path) {
         this.nativeObject.setFontPath(path);
     }
-
 }
-
 module.exports = exports = Printer;

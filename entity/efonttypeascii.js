@@ -1,6 +1,11 @@
 /*globals requireClass */
 const NativeEFontTypeAscii = requireClass('com.pax.dal.entity.EFontTypeAscii');
 
+/**
+ * Enum for EFontTypeAscii values.
+ * @readonly
+ * @enum {number}
+ */
 const EFontTypeAscii = {
     FONT_8_16 : 0,
     /** @deprecated */

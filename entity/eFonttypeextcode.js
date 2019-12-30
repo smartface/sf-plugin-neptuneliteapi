@@ -1,6 +1,11 @@
 /*globals requireClass */
 const NativeEFontTypeExtCode = requireClass('com.pax.dal.entity.EFontTypeExtCode');
 
+/**
+ * Enum for EFontTypeExtCode values.
+ * @readonly
+ * @enum {number}
+ */
 const EFontTypeExtCode = {
     FONT_16_16 : 0,
     FONT_24_24 : 1,
