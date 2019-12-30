@@ -55,11 +55,11 @@ class Printer {
     /**
 	 * Sets space for word & line.
 	 * @property {object} params
-     * @property {object} params.wordSpace
-     * @property {object} params.lineSpace
+     * @property {number} params.wordSpace
+     * @property {number} params.lineSpace
 	 * @public
 	 */
-    set spaceSet(params) {
+    set spaceSet(params = {}) {
         this.nativeObject.spaceSet(params.wordSpace,params.lineSpace);
     }
 
@@ -102,7 +102,7 @@ class Printer {
 	 * @public
 	 */
     set printBitmapWithMonoThreshold(params = {}) {
-        this.nativeObject.printBitmapWithMonoThreshold(params.image, params.threshold);
+        this.nativeObject.printBitmapWithMonoThreshold(params.image.nativeObject.getBitmap(), params.threshold);
     }
 
     /**
@@ -214,7 +214,7 @@ class Printer {
 	 */
     print(image) {
         return new Promise( (resolve,reject) => {
-            let callback = IPrinter.IPinterListener.implement({
+            let callback = NativePrinter.IPinterListener.implement({
                 onSucc: function(){
                     resolve();
                 },
@@ -222,22 +222,21 @@ class Printer {
                     reject(status);
                 }
             });
-            this.nativeObject.print(image, callback);
+            this.nativeObject.print(image.nativeObject.getBitmap(), callback);
         })
     }
 
     /**
 	 * Asynchronous Print Image by threshold
 	 * @method
-     * @param {object} params
-	 * @param {UI.Image} params.image
-     * @param {number} params.threshold
+	 * @param {UI.Image} image
+     * @param {number} threshold
      * @returns {Promise}
 	 * @public
 	 */
-    print(params = {}) {
+    printWithThreshold(image,threshold) {
         return new Promise( (resolve,reject) => {
-            let callback = IPrinter.IPinterListener.implement({
+            let callback = NativePrinter.IPinterListener.implement({
                 onSucc: function(){
                     resolve();
                 },
@@ -245,13 +244,12 @@ class Printer {
                     reject(status);
                 }
             });
-            this.nativeObject.print(params.image,params.threshold, callback);
+            this.nativeObject.print(image.nativeObject.getBitmap(),threshold, callback);
         })
-
     }
 
      /**
-	 * Sets font path
+	 * Sets absolute font path
      * @property {string} path
 	 * @public
 	 */
