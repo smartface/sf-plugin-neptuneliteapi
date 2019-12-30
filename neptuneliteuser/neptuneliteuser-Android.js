@@ -7,7 +7,7 @@
  * @copyright Smartface 2020
  */
 const NativeNeptuneLiteUser = requireClass('com.pax.neptunelite.api.NeptuneLiteUser');
-const AndroidConfig = require('sf-core/utils/Android/androidconfig');
+const AndroidConfig = require('sf-core/util/Android/androidconfig');
 
 /**
  * 
@@ -17,10 +17,15 @@ const AndroidConfig = require('sf-core/utils/Android/androidconfig');
  * @class
  */
 class NeptuneLiteUser {
+
+     constructor(_neptuneLiteUserInstance){
+        this.nativeObject = _neptuneLiteUserInstance;
+    }
+
     static getInstance() {
-        return this.nativeObject = this.nativeObject ?
-            this.nativeObject :
-            NativeNeptuneLiteUser.getInstance();
+        return this.singletonObj = this.singletonObj ?
+            this.singletonObj :
+            new NeptuneLiteUser(NativeNeptuneLiteUser.getInstance());
     }
 
     /**

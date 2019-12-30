@@ -20,7 +20,6 @@ class Printer {
     constructor(_printerInstance){
         this.nativeObject = _printerInstance;
     }
-
 	/**
 	 * Gets singleton Printer object.
 	 * @method
@@ -28,7 +27,9 @@ class Printer {
 	 * @public
 	 */
     static getInstance(printer) {
-        return this.nativeObject ? this.nativeObject : new Printer(printer);
+    return this.singletonObj = this.singletonObj ? 
+        this.singletonObj : 
+        new Printer(printer);
     }
 
     /**
