@@ -37,6 +37,10 @@ implementation project(":neptuneliteapi")
 ## Usage
 
  - [NeptuneLiteApi-Sample](https://github.com/muhammedyalcin/neptuneliteapi-sample)
+ 
+## API docs
+After initializing the NeptuneLiteAPI plugin, NeptuneLiteAPI APIs can be used.
+- [Full API Docs](./doc)
 
 ## Need Help?
 
