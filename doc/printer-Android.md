@@ -72,18 +72,23 @@ Sets font type.
 
 **Kind**: instance property of [<code>Printer</code>](#module_Printer..Printer)  
 **Access**: public  
+**See**
+
+- [EFontTypeAscii](https://github.com/smartface/sf-plugin-neptuneliteapi/blob/master/doc/efonttypeascii.md)
+- [EFontTypeExtCode](https://github.com/smartface/sf-plugin-neptuneliteapi/blob/master/doc/efonttypeextcode.md)
+
 **Properties**
 
 | Name | Type |
 | --- | --- |
 | params | <code>object</code> | 
-| params.asciiFontType | <code>object</code> | 
-| params.cFontType | <code>object</code> | 
+| params.asciiFontType | <code>EFontTypeAscii</code> | 
+| params.cFontType | <code>EFontTypeExtCode</code> | 
 
 <a name="module_Printer..Printer+spaceSet"></a>
 
 #### printer.spaceSet
-Sets space for word & line.
+Sets space for word & line. The space should be in (2^7-1) and -2^7 range
 
 **Kind**: instance property of [<code>Printer</code>](#module_Printer..Printer)  
 **Access**: public  
@@ -120,8 +125,8 @@ Sets print string&charset
 | Name | Type |
 | --- | --- |
 | params | <code>object</code> | 
-| params.str | <code>object</code> | 
-| params.charset | <code>object</code> | 
+| params.str | <code>string</code> | 
+| params.charset | <code>string</code> | 
 
 <a name="module_Printer..Printer+printBitmap"></a>
 
