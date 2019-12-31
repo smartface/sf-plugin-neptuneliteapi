@@ -45,8 +45,10 @@ class Printer {
     /**
 	 * Sets font type.
 	 * @property {object} params
-     * @property {object} params.asciiFontType
-     * @property {object} params.cFontType
+     * @property {EFontTypeAscii} params.asciiFontType
+     * @property {EFontTypeExtCode} params.cFontType
+     * @see {@link https://github.com/smartface/sf-plugin-neptuneliteapi/blob/master/doc/efonttypeascii.md EFontTypeAscii}
+     * @see {@link https://github.com/smartface/sf-plugin-neptuneliteapi/blob/master/doc/efonttypeextcode.md EFontTypeExtCode}
 	 * @public
 	 */
     set fontSet(params = {}) {
@@ -54,7 +56,7 @@ class Printer {
     }
 
     /**
-	 * Sets space for word & line.
+	 * Sets space for word & line. The space should be in (2^7-1) and -2^7 range
 	 * @property {object} params
      * @property {number} params.wordSpace
      * @property {number} params.lineSpace
@@ -76,8 +78,8 @@ class Printer {
     /**
 	 * Sets print string&charset
 	 * @property {object} params
-     * @property {object} params.str
-     * @property {object} params.charset
+     * @property {string} params.str
+     * @property {string} params.charset
 	 * @public
 	 */
     set printStr(params) {
