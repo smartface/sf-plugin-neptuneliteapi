@@ -3,22 +3,40 @@
 Smartface NeptuneLiteApi Android plugin is a wrapper to use while developing  apps on Smartface platform. To be consider, it is just developed  for Android and doesn't perform any action with regular run-on-device scenarios.
 
 ## Installation
+Smartface Firebase plugin can be installed via npm easily from our public npm repository. The installation is pretty easy via Smartface Cloud IDE.
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+- Run command in terminal `(cd ~/workspace/scripts && npm i -S sf-plugin-neptuneliteapi)`
 
-```bash
-pip install foobar
+## Configuration
+Installation script automatically configures project.json. Please verify following records are in place.
+Configuration is needed once only
+
+**Step 1**
+- This repository contains prepared android library project under `~/Native` directory. 
+- Finally, specify neptuneliteapi plugin library to config/project.json.
+
+```javascript
+"plugins": {
+  "modules": {
+    "neptuneliteapi": {
+      "path": "plugins/Android/neptuneliteapi",
+      "active": true
+    }
+  }
+},
 ```
+**Step 2**
+- Specify library project in dependencies.gradle which is located under `~/workspace/config/Android` folder. Such as;
+```groovy
+dependencies {
+implementation project(":neptuneliteapi")
+}
+```
+
 
 ## Usage
 
-```python
-import foobar
-
-foobar.pluralize('word') # returns 'words'
-foobar.pluralize('goose') # returns 'geese'
-foobar.singularize('phenomena') # returns 'phenomenon'
-```
+ - [NeptuneLiteApi-Sample](https://github.com/muhammedyalcin/neptuneliteapi-sample)
 
 ## Need Help?
 

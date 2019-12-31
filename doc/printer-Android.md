@@ -28,7 +28,7 @@ Smartface Printer class is wrapper for NeptuneLiteUserApi's Printer component.
             * [.init()](#module_Printer..Printer+init)
             * [.start()](#module_Printer..Printer+start)
             * [.print(image)](#module_Printer..Printer+print) ⇒ <code>Promise</code>
-            * [.print(params)](#module_Printer..Printer+print) ⇒ <code>Promise</code>
+            * [.printWithThreshold(image, threshold)](#module_Printer..Printer+printWithThreshold) ⇒ <code>Promise</code>
         * _static_
             * [.getInstance(printer)](#module_Printer..Printer.getInstance)
 
@@ -61,7 +61,7 @@ This class is a singleton component. It provides properties for initializing ,pr
         * [.init()](#module_Printer..Printer+init)
         * [.start()](#module_Printer..Printer+start)
         * [.print(image)](#module_Printer..Printer+print) ⇒ <code>Promise</code>
-        * [.print(params)](#module_Printer..Printer+print) ⇒ <code>Promise</code>
+        * [.printWithThreshold(image, threshold)](#module_Printer..Printer+printWithThreshold) ⇒ <code>Promise</code>
     * _static_
         * [.getInstance(printer)](#module_Printer..Printer.getInstance)
 
@@ -92,8 +92,8 @@ Sets space for word & line.
 | Name | Type |
 | --- | --- |
 | params | <code>object</code> | 
-| params.wordSpace | <code>object</code> | 
-| params.lineSpace | <code>object</code> | 
+| params.wordSpace | <code>number</code> | 
+| params.lineSpace | <code>number</code> | 
 
 <a name="module_Printer..Printer+step"></a>
 
@@ -260,7 +260,7 @@ Gets cut mode
 <a name="module_Printer..Printer+fontPath"></a>
 
 #### printer.fontPath
-Sets font path
+Sets absolute font path
 
 **Kind**: instance property of [<code>Printer</code>](#module_Printer..Printer)  
 **Access**: public  
@@ -297,9 +297,9 @@ Asynchronous Print Image
 | --- | --- |
 | image | <code>UI.Image</code> | 
 
-<a name="module_Printer..Printer+print"></a>
+<a name="module_Printer..Printer+printWithThreshold"></a>
 
-#### printer.print(params) ⇒ <code>Promise</code>
+#### printer.printWithThreshold(image, threshold) ⇒ <code>Promise</code>
 Asynchronous Print Image by threshold
 
 **Kind**: instance method of [<code>Printer</code>](#module_Printer..Printer)  
@@ -307,9 +307,8 @@ Asynchronous Print Image by threshold
 
 | Param | Type |
 | --- | --- |
-| params | <code>object</code> | 
-| params.image | <code>UI.Image</code> | 
-| params.threshold | <code>number</code> | 
+| image | <code>UI.Image</code> | 
+| threshold | <code>number</code> | 
 
 <a name="module_Printer..Printer.getInstance"></a>
 
