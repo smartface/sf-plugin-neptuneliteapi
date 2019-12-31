@@ -7,6 +7,7 @@
  * @copyright Smartface 2020
  */
 const NativePrinter = requireClass('com.pax.dal.IPrinter');
+const SFPrinter = requireClass('com.smartface.neptuneliteapi.SFPrinter');
 
 /**
  * 
@@ -18,7 +19,7 @@ const NativePrinter = requireClass('com.pax.dal.IPrinter');
  */
 class Printer {
     constructor(_printerInstance){
-        this.nativeObject = _printerInstance;
+        this.nativeObject = new SFPrinter(_printerInstance);
     }
 	/**
 	 * Gets singleton Printer object.
@@ -135,7 +136,6 @@ class Printer {
         this.nativeObject.leftIndent(indent);
     }
 
-    //ToDo: Handle exception case
     /**
 	 * Gets dot line
      * @returns {number}
