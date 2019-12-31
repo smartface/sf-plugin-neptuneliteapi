@@ -4,6 +4,7 @@
   "description": "Smartface NeptuneLiteAPI Plugin for Smartface Native Framework",
   "main": "index.js",
   "scripts": {
+    "postinstall": "./scripts/postinstall.sh",
     "docs": "bash ./createdoc.sh"
   },
   "keywords": [
